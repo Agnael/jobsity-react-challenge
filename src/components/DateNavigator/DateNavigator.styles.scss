@@ -1,0 +1,14 @@
+.date-navigator {
+    &-container {
+      display: flex;
+      justify-content: space-between;
+      margin: $space-small 0 $space-small;
+      align-items: center;
+    };
+  
+    &-text {
+      font-size: $font-size-extra-large;
+      font-weight: $font-weight-semi-bold;
+      color: $tx-color-primary;
+    };
+};

@@ -1,0 +1,38 @@
+.calendar-day {
+  &-card {
+    width: 13vw;
+    min-height: 5vh;
+    cursor: cell;
+    background-color:  $bg-color-primary;
+
+    &:hover {
+      background: $bg-color-purple;
+    }
+
+    &--disabled {
+      background-color: $bg-color-secondary !important;
+      cursor: not-allowed;
+
+      &:hover {
+        background: $bg-color-secondary;
+      }
+    }
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    margin-left: $padding-small;
+  }
+
+  &-content {
+    padding: 0;
+  }
+
+  &-text {
+    color: $tx-color-primary;
+    text-align: "center";
+    font-size: $font-size-extra-small;
+    margin-top: $padding-medium;
+  }
+}
