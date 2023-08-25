@@ -22,37 +22,44 @@ export const getWeekDays = () => {
 };
 
 export const getCurrentMonthCalendarizableDays = (date) => {
-  const baseDate = dayjs(date);
-  const month = baseDate.format("M");
-  const year = baseDate.format("YYYY");
+  /*
+   * A general functional approach is prefered so the function was refactored
+   * to be consistent with it, since it was using different approaches at
+   * different points, this benchmarks can be seen as an extra argument for
+   * this, since the new versions are also faster (unexpected in some cases):
+   * Ranged mapping: https://www.measurethat.net/Benchmarks/ShowResult/454245
+   * Array union: https://www.measurethat.net/Benchmarks/ShowResult/454246
+   */
 
-  const amountOfDays = baseDate.daysInMonth() + 1;
-  const weekdayOfFirstDayOfCurrentMonth = Number(
-    baseDate.startOf("month").day()
-  );
+  const baseDate = dayjs(date);
+  const month = Number(baseDate.format("M"));
+  const year = Number(baseDate.format("YYYY"));
+
+  const weekdayOfFirstDayOfCurrentMonth = baseDate.startOf("month").day();
+
   const lastDayOfPreviousMonth = Number(
     getPreviousMonthDate(baseDate).endOf("month").format("D")
   );
 
-  let lastMonthDays = [];
-  if (weekdayOfFirstDayOfCurrentMonth > 0) {
-    lastMonthDays = [...Array(weekdayOfFirstDayOfCurrentMonth)]
-      .map((_, index) => ({
-        isEnabled: false,
-        number: lastDayOfPreviousMonth - index,
-      }))
-      .reverse();
-  }
+  const lastMonthDays =
+    weekdayOfFirstDayOfCurrentMonth > 0
+      ? [...Array(weekdayOfFirstDayOfCurrentMonth)]
+          .map((_, index) => ({
+            isEnabled: false,
+            number: lastDayOfPreviousMonth - index,
+          }))
+          .reverse()
+      : [];
 
-  const currentMonthDays = [...Array(amountOfDays).keys()].map((day) => ({
-    number: day,
+  const amountOfDays = baseDate.daysInMonth();
+  const currentMonthDays = [...Array(amountOfDays).keys()].map((index) => ({
+    number: index + 1,
     isEnabled: true,
     month,
     year,
   }));
-  currentMonthDays.shift();
 
-  const calendarDays = lastMonthDays.concat(currentMonthDays);
+  const calendarDays = [...lastMonthDays, ...currentMonthDays];
 
   const nextMonthAmount = DAYS_IN_WEEK - (calendarDays.length % DAYS_IN_WEEK);
   const nextMonthDays = [...Array(nextMonthAmount).keys()].map((day) => ({
@@ -60,7 +67,7 @@ export const getCurrentMonthCalendarizableDays = (date) => {
     isEnabled: false,
   }));
 
-  return calendarDays.concat(nextMonthDays);
+  return [...calendarDays, ...nextMonthDays];
 };
 
 export const getPreviousMonthDate = (date) => {
