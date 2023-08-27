@@ -1,11 +1,11 @@
 .calendar-header {
   &-card {
-    width: 13vw;
-    min-height: 5vh;
-    text-align: center;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
+    // width: 13vw;
+    min-height: 2rem;
+    // text-align: center;
+    // justify-content: center;
+    // display: flex;
+    // flex-direction: column;
     background-color: $bg-color-light-blue !important;
     border-radius: $padding-extra-small;
     font-size: $font-size-regular;
@@ -14,19 +14,19 @@
 
   &-text {
     &--small {
-        display: none;
+      display: none;
 
-        @media (max-width: $breakpoint-screen-small) {
-            display: inline;
-        }
+      @media (max-width: $breakpoint-screen-small) {
+        display: inline;
+      }
     }
 
     &--large {
-        display: inline;
+      display: inline;
 
-        @media (max-width: $breakpoint-screen-small) {
-            display: none;
-        }
+      @media (max-width: $breakpoint-screen-small) {
+        display: none;
+      }
     }
   }
 }

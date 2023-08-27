@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Provider as ReduxProvider } from "react-redux";
 
 import Main from "./Main";
-import reducers from "./reducers";
+import reducers from "./store/reducers";
 import reportWebVitals from "./reportWebVitals";
 import getStore from "./store/getStore";
 
@@ -11,11 +11,13 @@ import getStore from "./store/getStore";
 import "./sass/app.scss";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ReduxProvider store={getStore(reducers)}>
-      <Main />
-    </ReduxProvider>
-  </React.StrictMode>,
+  // Seems to be causing errors on the outdated MUI in the project
+  // https://stackoverflow.com/a/61290642
+  // <React.StrictMode>
+  <ReduxProvider store={getStore(reducers)}>
+    <Main />
+  </ReduxProvider>,
+  // </React.StrictMode>
   document.getElementById("root")
 );
 

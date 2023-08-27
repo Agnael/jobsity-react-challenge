@@ -1,0 +1,26 @@
+.location-picker {
+  //   position: relative;
+  //   width: 100%;
+  //   min-width: 1px;
+
+  //   &::after {
+  //     content: "asd";
+  //   }
+
+  //   padding-bottom: $space-extra-large;
+
+  &-input {
+  }
+
+  //   .MuiOutlinedInput-input {
+  //     padding: $padding-medium;
+  //     position: relative;
+  //   }
+
+  &-result-container {
+    position: absolute;
+    overflow: visible;
+    width: 100%;
+    z-index: 110000;
+  }
+}

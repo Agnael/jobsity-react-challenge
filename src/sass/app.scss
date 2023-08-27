@@ -2,12 +2,14 @@
 @import "../components/DateNavigator/DateNavigator.styles.scss";
 @import "../components/CalendarHeader/CalendarHeader.styles.scss";
 @import "../components/CalendarDay/CalendarDay.styles.scss";
+@import "../components/LocationPicker/LocationPicker.styles.scss";
+@import "../components/ReminderFormDialog/ReminderFormDialog.styles.scss";
 
 html,
 body {
   margin: 0;
   color: $tx-color-primary;
-  font-family:  $font-family-primary;
+  font-family: $font-family-primary;
   font-size: $space-small;
   line-height: 1.4;
 

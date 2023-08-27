@@ -1,7 +1,18 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 
-const initialState = {};
+import { calendarInitialState } from "./calendar";
+import { profileInitialState } from "./profile";
+
+// const dayMap = new Map([0, []]);
+// const monthMap = new Map([0, dayMap]);
+// const yearMap = new Map([0, monthMap]);
+
+const initialState = {
+  calendar: calendarInitialState,
+  profile: profileInitialState,
+};
+
 const enhancers = [];
 const middleware = [thunk];
 

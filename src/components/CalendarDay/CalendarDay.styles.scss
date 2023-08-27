@@ -1,13 +1,14 @@
+@import "/src/sass/commons.scss";
+
 .calendar-day {
   &-card {
-    width: 13vw;
+    // width: 13vw;
     min-height: 5vh;
     cursor: cell;
-    background-color:  $bg-color-primary;
 
-    &:hover {
-      background: $bg-color-purple;
-    }
+    // &:hover {
+    //   background: $bg-color-purple;
+    // }
 
     &--disabled {
       background-color: $bg-color-secondary !important;
@@ -17,16 +18,34 @@
         background: $bg-color-secondary;
       }
     }
+
+    &.active {
+      border: 3px solid darken($bg-color-purple, 10);
+    }
   }
 
   &-header {
     display: flex;
     justify-content: space-between;
-    margin-left: $padding-small;
+    padding: 0 $padding-small $padding-extra-small $padding-small;
+    border-bottom-right-radius: 10px;
+    border-right: 3px solid $bg-color-purple;
+    border-bottom: 3px solid $bg-color-purple;
+    background: $bg-color-purple;
+    position: absolute;
+    // background: red;
+    line-height: normal;
+    box-sizing: border-box;
   }
 
+  // This one is being applied last, so it should take precedence over other
+  // classes in the same element and inherited properties, but it's being
+  // overwritten and I need to submit the challengeee in 15min so I have no
+  // time to deal with this. !IMPORTANTTT.
   &-content {
-    padding: 0;
+    padding: 0 !important;
+    height: 100px;
+    overflow-y: auto;
   }
 
   &-text {
@@ -34,5 +53,19 @@
     text-align: "center";
     font-size: $font-size-extra-small;
     margin-top: $padding-medium;
+  }
+
+  &-reminder {
+    color: $tx-color-primary;
+    text-align: "center";
+    font-size: $font-size-extra-small;
+    margin-top: $padding-medium;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+
+    &:hover {
+      cursor: pointer;
+      border-color: red;
+    }
   }
 }

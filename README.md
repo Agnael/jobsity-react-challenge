@@ -1,46 +1,57 @@
-<div align="center">
-    <img src="https://git.jobsity.com/jobsity/react-interview-challenge/-/raw/main/public/jobsity-logo.png"/>
-</div>
+### Requirements
 
-# React Interview Challenge
+I'm writing this section right before pushing the challenge to justify why are there requirements missing.
 
-## Description
+#### Completed
 
-This project is designed to test your knowledge of front-end web technologies and assess your ability to create front-end UI products with attention to detail, cross-browser compatibility, standards, and reusability.
+- [x] Ability to add "_reminders_" (max. 30 characters) for a day and time specified by the user.
 
+- [x] Ability to include a city as a location for the reminder.
 
-## Assignment
+- [x] Ability to edit reminders - including changing text, city, day, and time.
 
-The goal of this exercise is to create a demo calendar application using React.
+#### Missing
 
-You are provided a base application with a calendar page at `/calendar`. You must allow the user to create "reminder" cards, as described in the Mandatory features section.
-![CalendarJobsity](/uploads/57147905a7a9cc1e0cf46e7886c76ef7/CalendarJobsity.png)
+- [ ] Add a weather service call from [VisualCrossing](https://www.visualcrossing.com/weather/weather-data-services#) and get the average temperature forecast (e.g. 15° C) for the date of the calendar reminder based on the city.
 
-## Mandatory features
- - Ability to add "*reminders*" (max. 30 characters) for a day and time specified by the user.
- - Ability to include a city as a location for the reminder.
- - Ability to edit reminders - including changing text, city, day, and time.
- - Add a weather service call from [VisualCrossing](https://www.visualcrossing.com/weather/weather-data-services#) and get the average temperature forecast (e.g. 15° C) for the date of the calendar reminder based on the city.
- - Change the weekend days cells' color
+- [ ] Change the weekend days cells' color.
 
-## Bonus (Optional)
+I spent too much time rolling my own autocomplete component and, at the end, I didn't have time to add the per-reminer weather API call. However, the app is indeed using API calls to get the user's location by IP using one API, and then, on the reminder creation form, I'm also fetching locations using the GeoCode API.
 
-- Properly handle overflow when multiple reminders appear on the same date.
-- Unit test the functionality: *Ability to add "*reminders*" (max. 30 characters) for a day and time specified by the user.*
+As for the weekend cells colors, I just forgot about it until now, seemed too silly to focus on at the time.
 
-## Considerations
+On a side note, I also didn't do much styling because I noticed I was already getting out of time because of my autocomplete fiasco, didn't even got to really finish that either.
 
- - Show us in the Readme all relevant information about your project.
- - The project is completely focused on Front-end. Ignore the Back-end.
- - Feel free to use small helper libraries for:
- -- UI Elements.
- -- Date/Time handling.
- - We have implemented Redux thunk for state management, but you may use any state manager you are familiar with.
- - Show us your capabilities in CSS and styling, if possible.
- - Feel free to use Typescript if you prefer it
+### Considerations
 
-# How to deploy
+- Just as a general rule, I'll avoid adding any extra packages to the project (i.e. For this MUI version, the Autocomplete component comes in a separate package), since that seems to better suit the spirit of the challenge.
 
- - Run `npm install` | `yarn install` to install all dependencies.
- - Run `npm start`   | `yarn run` to run the app locally.
- - You can find the project running on `localhost:3000`.
+- Some API calls are intentionally throttled with a small timeout, so that stuff like loading spinners don't disappear too fast.
+
+- Every existing component uses JS and PropTypes so, even though I'd rather use typescript if I were to create this project from scratch, I don't think refactoring everything is a wise use of challenge time and I also prefer the codebase to be consistent, so I won't be mixing approaches.
+
+- The project had MaterialUI preinstalled so I'd generally prefer using it's theming system and general styling tools, but since the challenge explicitly asks for some CSS showcasing and the project also has a SASS structure in place, I'll style everything with that same approach.
+
+- Localization was not a priority.
+
+- API calls are made in-situ, I wanted to move them into separate files later but it was not prioritary.
+
+### Reminders are stored within a structure of nested Maps
+
+This is a convoluted approach compared to just store every reminder in a single central array and then filter results out as necessary, but I figured it might come off as **not scalable** since the array would need to get implicitly iterated for each lookup, whereas the Map object uses a hash table and **access times should be constant**.
+
+This could also have been a structure of nested JS plain objects, not necessarily Maps. In fact, lookups might even be easier to read that way (reminders[year]?.[month]?.[day]?.[time]), but **Maps are arguably faster**.
+
+### Reminders stored in redux are mutable
+
+Even though the reducer returns a new state reference, the reminder map doesn't get re-created (hence a new reference) on each state change, so **the map's reference is the same across reducer executions**.
+
+Not a functional approach but, this way, this complex event map doesn't get copied in memory nor garbage collected after each event creation/update/deletion.
+
+This does expose the store to be mutated in some unexpected place in the application, so the speed boost isn't free of cost, and I would generally prefer to go with the immutable approach but my intent is to showcase some scalability in the design.
+
+### Known bugs
+
+- I'm depending on the already included `DayJs` package but it's unreliable, if "2023-02-31" get's parsed, dayjs will create a date for MARCH instead of FEBRUARY because of the days overflowing the end of the month, and since march does have 31 days, it thinks the date is valid. This affects the reminder creation form.
+
+- The `LocationPicker` general usability is not ideal, standard keyboard navigation won't work as expected, for example, because of me rolling the autocomplete component from scratch and not wanting to dwell on it.

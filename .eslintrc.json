@@ -2,11 +2,18 @@
   "extends": "react-app",
   "plugins": ["prettier", "eslint-plugin-import-helpers"],
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
     "react-hooks/exhaustive-deps": "warn",
     "react/react-in-jsx-scope": "off",
     "object-curly-newline": [
-      "error",
+      // "error" conflicted with how prettier does things so let's
+      // trust prettier handle it for now, for time's sake
+      "off",
       { "consistent": true, "minProperties": 7 }
     ],
     "no-alert": "error",
