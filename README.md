@@ -10,6 +10,12 @@ I'm writing this section right before pushing the challenge to justify why are t
 
 - [x] Ability to edit reminders - including changing text, city, day, and time.
 
+- [x] (Optional) Expand the calendar to support more than the current month or year.
+
+- [x] (Optional) Properly handle overflow when multiple reminders appear on the same date.
+
+- [x] (Optional) Unit test the functionality: Ability to add "reminders" (max. 30 characters) for a day and time specified by the user. Also, include a city.
+
 #### Missing
 
 - [ ] Add a weather service call from [VisualCrossing](https://www.visualcrossing.com/weather/weather-data-services#) and get the average temperature forecast (e.g. 15° C) for the date of the calendar reminder based on the city.
@@ -20,7 +26,7 @@ I spent too much time rolling my own autocomplete component and, at the end, I d
 
 As for the weekend cells colors, I just forgot about it until now, seemed too silly to focus on at the time.
 
-On a side note, I also didn't do much styling because I noticed I was already getting out of time because of my autocomplete fiasco, didn't even got to really finish that either.
+On a side note, I also didn't do much on the styling front because I noticed I was already getting out of time because of my autocomplete fiasco, didn't even got to finish that either (it works fine though, it's just unpolished).
 
 ### Considerations
 
