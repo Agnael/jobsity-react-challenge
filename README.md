@@ -28,6 +28,21 @@ As for the weekend cells colors, I just forgot about it until now, seemed too si
 
 On a side note, I also didn't do much on the styling front because I noticed I was already getting out of time because of my autocomplete fiasco, didn't even got to finish that either (it works fine though, it's just unpolished).
 
+### Some screenshots
+Notice the (working) year and month navigation buttons, current day marker (today is 26th), and the "go to today" and "reset navigations" links.  
+<img width="956" alt="image" src="https://github.com/Agnael/jobsity-react-challenge/assets/32271030/237b96f6-0faf-42ae-b242-14d1ef854977">
+
+Reminder creation form
+<img width="956" alt="image" src="https://github.com/Agnael/jobsity-react-challenge/assets/32271030/530f5ce1-1c03-4905-911e-3af8f91af949">
+
+Created reminder.
+That red square was not added with MS Paint, that's a hover border style I forgot to fix so the color. Most colors used by me are decided randomly here, as I mentioned, I didn't really had much time to do actual styling.
+<img width="957" alt="image" src="https://github.com/Agnael/jobsity-react-challenge/assets/32271030/2de209ae-93ff-4374-be27-9ec6579008e7">
+
+Reminder update form
+<img width="958" alt="image" src="https://github.com/Agnael/jobsity-react-challenge/assets/32271030/ac6ccf54-c4f9-4092-afd0-397e654ad17b">
+
+
 ### Considerations
 
 - Just as a general rule, I'll avoid adding any extra packages to the project (i.e. For this MUI version, the Autocomplete component comes in a separate package), since that seems to better suit the spirit of the challenge.
